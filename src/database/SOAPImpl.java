@@ -13,7 +13,7 @@ import javax.jws.WebService;
  *
  * @author jonathan
  */
-@WebService(endpointInterface = "client.UserDAOSOAPI")
+@WebService(endpointInterface = "databse.UserDAOSOAPI")
 public class SOAPImpl {
      SQLUserDAO sql = new SQLUserDAO();
     public UserDTO getStudent(String student_id) throws DALException{
