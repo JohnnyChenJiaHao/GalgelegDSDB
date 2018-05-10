@@ -23,9 +23,9 @@ import java.sql.Statement;
 public class Connector {
     private final String HOST     = "sql7.freemysqlhosting.net";
     private final int    PORT     = 3306;
-    private final String DATABASE = "sql7233706";
-    private final String USERNAME = "sql7233706"; 
-    private final String PASSWORD = "DBU8CYgNaw";
+    private final String DATABASE = "sql7236209";
+    private final String USERNAME = "sql7236209"; 
+    private final String PASSWORD = "llJdstCSmQ";
     private Connection connection;
     
     public Connector() {
