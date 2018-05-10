@@ -16,7 +16,8 @@ public class SQLUserServer {
     public static void main(String[] args) throws DALException{
     SOAPImpl soap = new SOAPImpl();
    
-    System.out.print("Hej Johnny");
+    System.out.print("SQL server is up and running");
+    
     Endpoint.publish("http://[::]:9911/SQL_Soap", soap);
     }
 }

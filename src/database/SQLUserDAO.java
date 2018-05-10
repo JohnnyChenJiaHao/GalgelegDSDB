@@ -22,16 +22,18 @@ import java.util.logging.Logger;
 public class SQLUserDAO implements UserDAO {
     private Connector connector = new Connector();
 	@Override
-	public UserDTO getStudent(String student_Id) throws DALException {
+	public List<UserDTO> getStudent(String student_Id) throws DALException {
 		ResultSet rs = null;
+                List<UserDTO> list = new ArrayList<UserDTO>();
 		try { //Files.readAllLines(Paths.get("/UserCommands.txt")).get(0)
-			PreparedStatement stmt = connector.getConnection().prepareStatement("select * from brugere where student_Id = ?;");
+			PreparedStatement stmt = connector.getConnection().prepareStatement("select * from brugere where student_Id = ? order by score desc;");
 			stmt.setString(1, student_Id);
 			rs = stmt.executeQuery();
 		} catch (Exception e) {
 			throw new DALException(e.getMessage()); 
 		}
 	    try {
+                /*
 	    	if (!rs.first()) throw new DALException("Student " + student_Id + " findes ikke");
 	    	UserDTO user = new UserDTO ();
 	    	user.setStudentID(rs.getString("student_Id"));
@@ -39,10 +41,29 @@ public class SQLUserDAO implements UserDAO {
 			user.setTime_used(rs.getDouble("time_used"));
 			user.setScore(rs.getDouble("score"));
 	    	return user;
+                */
+                UserDTO user = new UserDTO();
+			int last =0;
+			while (rs.next()) 
+			{
+				if (last != 0){
+					list.add(user);
+					user = new UserDTO();
+				}
+				user.setStudentID(rs.getString("student_Id"));
+				user.setNumber_of_tries(rs.getInt("number_of_tries"));
+				user.setTime_used(rs.getDouble("time_used"));
+				user.setScore(rs.getDouble("score"));
+				
+                                
+				last++;
+			}
+			list.add(user);
 	    }
 	    catch (SQLException e) {
 	    	throw new DALException(e); 
 	    }
+            return list;
 	}
 
 	@Override
@@ -50,7 +71,7 @@ public class SQLUserDAO implements UserDAO {
 		List<UserDTO> list = new ArrayList<UserDTO>();
 		ResultSet rs;
 		try { //Files.readAllLines(Paths.get("/UserCommands.txt")).get(1)
-			rs = connector.doQuery("select * from brugere;");
+			rs = connector.doQuery("select * from brugere order by score desc;");
 		} catch (Exception e) {
 			throw new DALException(e.getMessage());
 		}
