@@ -13,7 +13,7 @@ import javax.jws.WebService;
  *
  * @author jonathan
  */
-@WebService(endpointInterface = "client.UserDAOSOAPI")
+@WebService(endpointInterface = "database.UserDAOSOAPI")
 public class SOAPImpl {
     SQLUserDAO sql = new SQLUserDAO();
     
@@ -28,6 +28,5 @@ public class SOAPImpl {
     
     public  void createScore(UserDTO user){
         sql.createScore(user);
-    }
-    
+    }    
 }

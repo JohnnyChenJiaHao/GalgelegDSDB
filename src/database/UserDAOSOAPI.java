@@ -15,7 +15,7 @@ import javax.jws.WebService;
  */
 @WebService
 public interface UserDAOSOAPI {
-    @WebMethod UserDTO getStudent(String student_id) throws DALException;
+    @WebMethod List<UserDTO> getStudent(String student_id) throws DALException;
     @WebMethod List<UserDTO> getStudentList() throws DALException;
     @WebMethod void createScore(UserDTO user);
 }

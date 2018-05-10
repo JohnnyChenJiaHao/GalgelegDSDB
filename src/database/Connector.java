@@ -25,7 +25,7 @@ public class Connector {
     private final int    PORT     = 3306;
     private final String DATABASE = "sql7236209";
     private final String USERNAME = "sql7236209"; 
-    private final String PASSWORD = "llJdstCSmQ";
+    private final String PASSWORD = "llJdstCSmQ"; 
     private Connection connection;
     
     public Connector() {
