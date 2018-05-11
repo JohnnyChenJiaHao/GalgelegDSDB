@@ -26,7 +26,7 @@ public class SQLUserDAO implements UserDAO {
 		ResultSet rs = null;
                 List<UserDTO> list = new ArrayList<UserDTO>();
 		try { //Files.readAllLines(Paths.get("/UserCommands.txt")).get(0)
-			PreparedStatement stmt = connector.getConnection().prepareStatement("select * from brugere where student_Id = ? order by score desc;");
+			PreparedStatement stmt = connector.getConnection().prepareStatement("select * from brugere where student_Id = ? order by abs(score) desc;");
 			stmt.setString(1, student_Id);
 			rs = stmt.executeQuery();
 		} catch (Exception e) {
@@ -71,7 +71,7 @@ public class SQLUserDAO implements UserDAO {
 		List<UserDTO> list = new ArrayList<UserDTO>();
 		ResultSet rs;
 		try { //Files.readAllLines(Paths.get("/UserCommands.txt")).get(1)
-			rs = connector.doQuery("select * from brugere order by score desc;");
+			rs = connector.doQuery("select * from brugere order by abs(score) desc;");
 		} catch (Exception e) {
 			throw new DALException(e.getMessage());
 		}
