@@ -26,7 +26,7 @@ public class SQLUserDAO implements UserDAO {
 		ResultSet rs = null;
                 List<UserDTO> list = new ArrayList<UserDTO>();
 		try { //Files.readAllLines(Paths.get("/UserCommands.txt")).get(0)
-			PreparedStatement stmt = connector.getConnection().prepareStatement("select * from brugere where student_Id = ? order by score desc;");
+			PreparedStatement stmt = connector.getConnection().prepareStatement("select * from brugere where student_Id = ? order by abs(score) desc;");
 			stmt.setString(1, student_Id);
 			rs = stmt.executeQuery();
 		} catch (Exception e) {
@@ -71,7 +71,7 @@ public class SQLUserDAO implements UserDAO {
 		List<UserDTO> list = new ArrayList<UserDTO>();
 		ResultSet rs;
 		try { //Files.readAllLines(Paths.get("/UserCommands.txt")).get(1)
-			rs = connector.doQuery("select * from brugere order by score desc;");
+			rs = connector.doQuery("select * from brugere order by abs(score) desc;");
 		} catch (Exception e) {
 			throw new DALException(e.getMessage());
 		}
@@ -111,7 +111,7 @@ public class SQLUserDAO implements UserDAO {
                        
                        System.out.println(s1+ s2 + s3+ "," +s4);
                     
-			PreparedStatement stmt = connector.getConnection().prepareStatement("INSERT INTO brugere (student_id, number_of_tries, time_used, score) values (?,?,?,?)");
+			PreparedStatement stmt = connector.getConnection().prepareStatement("INSERT INTO brugere (student_id, number_of_tries, time_used, score) values (?,?,?,?);");
 			stmt.setString(1, user.getStudentID());
                         stmt.setInt(2, user.getNumber_of_tries());
                         stmt.setDouble(3, user.getTime_used());
