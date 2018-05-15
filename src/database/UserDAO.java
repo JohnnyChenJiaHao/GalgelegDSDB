@@ -12,7 +12,7 @@ import java.util.List;
  * @author jonathan
  */
 public interface UserDAO {
-        UserDTO getStudent(String student_id) throws DALException;
+        List<UserDTO> getStudent(String student_id) throws DALException;
 	List<UserDTO> getStudentList() throws DALException;
         void createScore(UserDTO user);
 }

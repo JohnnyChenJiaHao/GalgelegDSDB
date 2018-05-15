@@ -15,8 +15,9 @@ import javax.jws.WebService;
  */
 @WebService(endpointInterface = "database.UserDAOSOAPI")
 public class SOAPImpl {
-     SQLUserDAO sql = new SQLUserDAO();
-    public UserDTO getStudent(String student_id) throws DALException{
+    SQLUserDAO sql = new SQLUserDAO();
+    
+    public List<UserDTO> getStudent(String student_id) throws DALException{
        
         return sql.getStudent(student_id);
     }
@@ -27,6 +28,5 @@ public class SOAPImpl {
     
     public  void createScore(UserDTO user){
         sql.createScore(user);
-    }
-    
+    }    
 }
