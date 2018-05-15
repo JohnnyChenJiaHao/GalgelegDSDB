@@ -111,7 +111,7 @@ public class SQLUserDAO implements UserDAO {
                        
                        System.out.println(s1+ s2 + s3+ "," +s4);
                     
-			PreparedStatement stmt = connector.getConnection().prepareStatement("INSERT INTO brugere (student_id, number_of_tries, time_used, score) values (?,?,?,?)");
+			PreparedStatement stmt = connector.getConnection().prepareStatement("INSERT INTO brugere (student_id, number_of_tries, time_used, score) values (?,?,?,?);");
 			stmt.setString(1, user.getStudentID());
                         stmt.setInt(2, user.getNumber_of_tries());
                         stmt.setDouble(3, user.getTime_used());
